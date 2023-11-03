@@ -12,9 +12,22 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
         this.b = b;
         this.c = c;
         this.length = Math.pow(a*a + b*b + c*c, 0.5);
+        System.out.println(a + " " + b + " " + c);
         if (length == 0){
             throw new RuntimeException("Zero vector");
         }
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public double getC() {
+        return c;
     }
 
     @Override
@@ -76,6 +89,10 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
     @Override
     public double cosAngleBetweenVectors(ThreeDimensionalVector vector) {
         return (this.scalarProduct(vector))/(this.length*vector.length);
+    }
+    @Override
+    public double[] getArrValues() {
+        return new double[]{a,b,c};
     }
 
 

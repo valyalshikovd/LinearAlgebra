@@ -4,6 +4,7 @@ public interface Vector <T> {
     public static double cosAngleBetweenVectors(Vector vector1, Vector vector2){
         return (vector1.scalarProduct(vector2))/(vector1.length()*vector2.length());
     }
+    public double[] getArrValues();
     public T subtraction(T vector);
     public T  addition(T vector);
     public T scale(double a);

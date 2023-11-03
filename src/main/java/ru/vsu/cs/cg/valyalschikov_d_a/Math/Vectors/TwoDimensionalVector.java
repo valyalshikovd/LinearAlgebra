@@ -34,6 +34,12 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
     public static TwoDimensionalVector subtraction(TwoDimensionalVector a, TwoDimensionalVector b){
         return new TwoDimensionalVector(a.getA() - b.getA(), a.getB() - b.getB());
     }
+
+    @Override
+    public double[] getArrValues() {
+        return new double[]{a,b};
+    }
+
     @Override
     public TwoDimensionalVector subtraction(TwoDimensionalVector vector) {
         return new TwoDimensionalVector(this.getA() - vector.getA() , this.getB() - vector.getB());

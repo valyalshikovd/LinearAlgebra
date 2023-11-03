@@ -16,6 +16,23 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
             throw new RuntimeException("Zero vector");
         }
     }
+
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public double getD() {
+        return d;
+    }
+
     @Override
     public FourDimensionalVector subtraction(FourDimensionalVector vector) {
         return new FourDimensionalVector(
@@ -80,5 +97,9 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
     @Override
     public double cosAngleBetweenVectors(FourDimensionalVector vector) {
         return (scalarProduct(vector))/(this.length*vector.length);
+    }
+    @Override
+    public double[] getArrValues() {
+        return new double[]{a,b,c,d};
     }
 }

@@ -1,0 +1,78 @@
+package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
+
+public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
+
+    protected  double a;
+    protected double b;
+    protected double length;
+
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public TwoDimensionalVector(double a, double b) {
+        this.a = a;
+        this.b = b;
+        this.length = Math.pow(a*a + b*b, 0.5);
+        if (length == 0){
+            throw new RuntimeException("Zero vector");
+        }
+    }
+    public static TwoDimensionalVector addition(TwoDimensionalVector a, TwoDimensionalVector b){
+        return new TwoDimensionalVector(a.getA() + b.getA(), a.getB() + b.getB());
+    }
+    @Override
+    public TwoDimensionalVector addition(TwoDimensionalVector a) {
+        return new TwoDimensionalVector(a.getA() + this.getA(), a.getB() + this.getB());
+    }
+
+
+    public static TwoDimensionalVector subtraction(TwoDimensionalVector a, TwoDimensionalVector b){
+        return new TwoDimensionalVector(a.getA() - b.getA(), a.getB() - b.getB());
+    }
+    @Override
+    public TwoDimensionalVector subtraction(TwoDimensionalVector a) {
+        return new TwoDimensionalVector(this.getA() - a.getA() , this.getB() - a.getB());
+    }
+
+
+    public static TwoDimensionalVector scale(double a, TwoDimensionalVector vector) {
+        return  new TwoDimensionalVector(vector.getA() * a, vector.getB() * a);
+    }
+    @Override
+    public TwoDimensionalVector scale(double a) {
+        return new TwoDimensionalVector(this.getA() * a, this.getB() * a);
+    }
+
+    @Override
+    public double length() {
+        return this.length;
+    }
+
+    @Override
+    public TwoDimensionalVector normalization() {
+        return new TwoDimensionalVector(this.a / length, this.b / length);
+    }
+    @Override
+    public double scalarProduct(TwoDimensionalVector vector) {
+        return this.length * vector.length * this.cosAngleBetweenVectors(vector);
+    }
+
+
+    public static double scalarProduct(TwoDimensionalVector vector1, TwoDimensionalVector vector2){
+        return vector1.length * vector2.length * cosAngleBetweenVectors(vector1, vector2);
+    }
+
+    @Override
+    public double cosAngleBetweenVectors(TwoDimensionalVector vector) {
+        return (this.a * vector.a + this.b * vector.b)/(this.length*vector.length);
+    }
+
+    public static double cosAngleBetweenVectors(TwoDimensionalVector vector1, TwoDimensionalVector vector2){
+        return (vector1.a * vector2.a + vector1.b * vector2.b)/(vector1.length*vector2.length);
+    }
+}

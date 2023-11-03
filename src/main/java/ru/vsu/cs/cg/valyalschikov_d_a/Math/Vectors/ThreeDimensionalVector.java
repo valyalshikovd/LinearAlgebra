@@ -12,7 +12,6 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
         this.b = b;
         this.c = c;
         this.length = Math.pow(a*a + b*b + c*c, 0.5);
-        System.out.println(a + " " + b + " " + c);
         if (length == 0){
             throw new RuntimeException("Zero vector");
         }
@@ -93,6 +92,13 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
     @Override
     public double[] getArrValues() {
         return new double[]{a,b,c};
+    }
+
+    public ThreeDimensionalVector vectorProduct(ThreeDimensionalVector vector){
+        double i = b * vector.getC() - c * vector.getB();
+        double j = a * vector.getC() - c * vector.getA();
+        double k = b * vector.getA() - a * vector.getB();
+        return new ThreeDimensionalVector(i,-j,k);
     }
 
 

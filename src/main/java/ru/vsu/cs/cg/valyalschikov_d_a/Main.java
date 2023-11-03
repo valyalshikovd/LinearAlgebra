@@ -5,6 +5,8 @@ import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.ThreeDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.TwoDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 //       ThreeDimensiomalMatrix matrix1 = new ThreeDimensiomalMatrix();
@@ -23,7 +25,19 @@ public class Main {
                 new ThreeDimensionalVector(4, -2, -6),
                 new ThreeDimensionalVector(2, 0, 3)
         );
-        matrix1.multiplyMatrix(matrix2).printMatrix();
+        matrix1.multiplyMatrix(matrix2).transposition().printMatrix();
 
+
+        ThreeDimensiomalMatrix matrix3 = new ThreeDimensiomalMatrix(
+                new ThreeDimensionalVector(2, -3, 1),
+                new ThreeDimensionalVector(4, 6, 0),
+                new ThreeDimensionalVector(-3, -1, 5)
+        );
+
+        System.out.println(matrix3.getDeterminant());
+
+        ThreeDimensionalVector vector1 = new ThreeDimensionalVector(2,3,5);
+        ThreeDimensionalVector vector2 = new ThreeDimensionalVector(1,2,1);
+        System.out.println(Arrays.toString(vector1.vectorProduct(vector2).getArrValues()));
     }
 }

@@ -3,17 +3,16 @@ package ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.ThreeDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 
-public class ThreeDimensiomalMatrix implements Matrix<ThreeDimensiomalMatrix> {
+public class ThreeDimensionalMatrix implements Matrix<ThreeDimensionalMatrix> {
 
     private int dimensional;
-    protected double[][] matrix;
     protected ThreeDimensionalVector[] matrixInVectors;
 
     ThreeDimensionalVector vector1;
     ThreeDimensionalVector vector2;
     ThreeDimensionalVector vector3;
 
-    public ThreeDimensiomalMatrix(ThreeDimensionalVector vector1,
+    public ThreeDimensionalMatrix(ThreeDimensionalVector vector1,
                                   ThreeDimensionalVector vector2,
                                   ThreeDimensionalVector vector3) {
         this.vector1 = vector1;
@@ -23,12 +22,15 @@ public class ThreeDimensiomalMatrix implements Matrix<ThreeDimensiomalMatrix> {
         dimensional = 3;
     }
 
-    public ThreeDimensiomalMatrix() {
+    public ThreeDimensionalMatrix() {
         dimensional = 3;
+        this.vector1 = new ThreeDimensionalVector(1, 0, 0);
+        this.vector2 = new ThreeDimensionalVector(0, 1, 0);
+        this.vector3 = new ThreeDimensionalVector(0, 0, 1);
         matrixInVectors = new ThreeDimensionalVector[]{
-                new ThreeDimensionalVector(1, 0, 0),
-                new ThreeDimensionalVector(0, 1, 0),
-                new ThreeDimensionalVector(0, 0, 1)
+                vector1,
+                vector2,
+                vector3
         };
     }
 
@@ -42,17 +44,14 @@ public class ThreeDimensiomalMatrix implements Matrix<ThreeDimensiomalMatrix> {
         return matrixInVectors;
     }
 
-    @Override
-    public double get(int x, int y) {
-        return 0;
-    }
+
 
     @Override
-    public Matrix<ThreeDimensiomalMatrix> addition(Matrix<ThreeDimensiomalMatrix> matrix) {
+    public Matrix<ThreeDimensionalMatrix> addition(Matrix<ThreeDimensionalMatrix> matrix) {
         if (matrix.getDimensional() != 3) {
             throw new RuntimeException("Матрица не той размерности");
         }
-        return new ThreeDimensiomalMatrix(
+        return new ThreeDimensionalMatrix(
                 vector1.addition((ThreeDimensionalVector) matrix.getMatrixInVectors()[0]),
                 vector2.addition((ThreeDimensionalVector) matrix.getMatrixInVectors()[1]),
                 vector3.addition((ThreeDimensionalVector) matrix.getMatrixInVectors()[2])
@@ -60,14 +59,14 @@ public class ThreeDimensiomalMatrix implements Matrix<ThreeDimensiomalMatrix> {
     }
 
     @Override
-    public Matrix<ThreeDimensiomalMatrix> multiplyVector(Vector<?> vector) {
+    public Matrix<ThreeDimensionalMatrix> multiplyVector(Vector<?> vector) {
         double[] values = vector.getArrValues();
         if (values.length != 3) {
             throw new RuntimeException("Матрица не той размерности");
         }
 
 
-        return new ThreeDimensiomalMatrix(
+        return new ThreeDimensionalMatrix(
                 vector1.scale(values[0]),
                 vector2.scale(values[1]),
                 vector3.scale(values[2])
@@ -75,7 +74,7 @@ public class ThreeDimensiomalMatrix implements Matrix<ThreeDimensiomalMatrix> {
     }
 
     @Override
-    public Matrix<ThreeDimensiomalMatrix> multiplyMatrix(Matrix<ThreeDimensiomalMatrix> matrix) {
+    public Matrix<ThreeDimensionalMatrix> multiplyMatrix(Matrix<ThreeDimensionalMatrix> matrix) {
         Vector[] vectors = matrix.getMatrixInVectors();
 
 
@@ -95,18 +94,18 @@ public class ThreeDimensiomalMatrix implements Matrix<ThreeDimensiomalMatrix> {
                 vectors[0].getArrValues()[1] * vector3.getA() + vectors[1].getArrValues()[1] * vector3.getB() + vectors[2].getArrValues()[1] * vector3.getC(),
                 vectors[0].getArrValues()[2] * vector3.getA() + vectors[1].getArrValues()[2] * vector3.getB() + vectors[2].getArrValues()[2] * vector3.getC());
 
-        return new ThreeDimensiomalMatrix(resVector1, resVector2, resVector3);
+        return new ThreeDimensionalMatrix(resVector1, resVector2, resVector3);
     }
 
     @Override
-    public Matrix<ThreeDimensiomalMatrix> transposition() {
+    public Matrix<ThreeDimensionalMatrix> transposition() {
 
 
         ThreeDimensionalVector res1 = new ThreeDimensionalVector(vector1.getA(), vector2.getA(), vector3.getA());
         ThreeDimensionalVector res2 = new ThreeDimensionalVector(vector1.getB(), vector2.getB(), vector3.getB());
         ThreeDimensionalVector res3 = new ThreeDimensionalVector(vector1.getC(), vector2.getC(), vector3.getC());
 
-        return new ThreeDimensiomalMatrix(res1, res2, res3);
+        return new ThreeDimensionalMatrix(res1, res2, res3);
 
     }
 

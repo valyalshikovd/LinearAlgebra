@@ -26,8 +26,8 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
         return new TwoDimensionalVector(a.getA() + b.getA(), a.getB() + b.getB());
     }
     @Override
-    public TwoDimensionalVector addition(TwoDimensionalVector a) {
-        return new TwoDimensionalVector(a.getA() + this.getA(), a.getB() + this.getB());
+    public TwoDimensionalVector addition(TwoDimensionalVector vector) {
+        return new TwoDimensionalVector(vector.getA() + this.getA(), vector.getB() + this.getB());
     }
 
 
@@ -35,8 +35,8 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
         return new TwoDimensionalVector(a.getA() - b.getA(), a.getB() - b.getB());
     }
     @Override
-    public TwoDimensionalVector subtraction(TwoDimensionalVector a) {
-        return new TwoDimensionalVector(this.getA() - a.getA() , this.getB() - a.getB());
+    public TwoDimensionalVector subtraction(TwoDimensionalVector vector) {
+        return new TwoDimensionalVector(this.getA() - vector.getA() , this.getB() - vector.getB());
     }
 
 
@@ -59,20 +59,18 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
     }
     @Override
     public double scalarProduct(TwoDimensionalVector vector) {
-        return this.length * vector.length * this.cosAngleBetweenVectors(vector);
+        return this.a * vector.a + this.b * vector.b;
     }
 
 
     public static double scalarProduct(TwoDimensionalVector vector1, TwoDimensionalVector vector2){
-        return vector1.length * vector2.length * cosAngleBetweenVectors(vector1, vector2);
+        return vector1.length * vector2.length * vector1.cosAngleBetweenVectors( vector2);
     }
 
     @Override
     public double cosAngleBetweenVectors(TwoDimensionalVector vector) {
-        return (this.a * vector.a + this.b * vector.b)/(this.length*vector.length);
+        return (this.scalarProduct(vector))/(this.length*vector.length);
     }
 
-    public static double cosAngleBetweenVectors(TwoDimensionalVector vector1, TwoDimensionalVector vector2){
-        return (vector1.a * vector2.a + vector1.b * vector2.b)/(vector1.length*vector2.length);
-    }
+
 }

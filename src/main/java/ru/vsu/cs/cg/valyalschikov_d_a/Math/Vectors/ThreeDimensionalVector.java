@@ -1,38 +1,82 @@
 package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 
 public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
-    @Override
-    public ThreeDimensionalVector subtraction(ThreeDimensionalVector a) {
-        return null;
+
+    protected double a;
+    protected double b;
+    protected double c;
+    protected double length;
+
+    public ThreeDimensionalVector(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.length = Math.pow(a*a + b*b + c*c, 0.5);
+        if (length == 0){
+            throw new RuntimeException("Zero vector");
+        }
     }
 
     @Override
-    public ThreeDimensionalVector addition(ThreeDimensionalVector a) {
-        return null;
+    public ThreeDimensionalVector subtraction(ThreeDimensionalVector vector) {
+        return new ThreeDimensionalVector(
+                this.a - vector.a,
+                this.b - vector.b,
+                this.c - vector.c
+        );
+    }
+
+    @Override
+    public ThreeDimensionalVector addition(ThreeDimensionalVector vector) {
+        return new ThreeDimensionalVector(
+                this.a + vector.a,
+                this.b + vector.b,
+                this.c + vector.c
+        );
+    }
+    public static ThreeDimensionalVector addition(ThreeDimensionalVector vector1, ThreeDimensionalVector vector2){
+        return new ThreeDimensionalVector(
+                vector1.a + vector2.a,
+                vector1.b + vector2.b,
+                vector1.c + vector2.c
+        );
+    }
+    public static ThreeDimensionalVector subtraction(ThreeDimensionalVector vector1, ThreeDimensionalVector vector2){
+        return new ThreeDimensionalVector(
+                vector1.a - vector2.a,
+                vector1.b - vector2.b,
+                vector1.c - vector2.c
+        );
     }
 
     @Override
     public ThreeDimensionalVector scale(double a) {
-        return null;
+        return new ThreeDimensionalVector(
+                this.a * a,
+                this.b * a,
+                this.c * a
+        );
     }
 
     @Override
     public double length() {
-        return 0;
+        return length;
     }
 
     @Override
     public ThreeDimensionalVector normalization() {
-        return null;
+        return new ThreeDimensionalVector(this.a / length, this.b / length, this.c / length);
     }
 
     @Override
     public double scalarProduct(ThreeDimensionalVector vector) {
-        return 0;
+        return this.a * vector.a + this.b * vector.b + this.c * vector.c;
     }
 
     @Override
     public double cosAngleBetweenVectors(ThreeDimensionalVector vector) {
-        return 0;
+        return (this.scalarProduct(vector))/(this.length*vector.length);
     }
+
+
 }

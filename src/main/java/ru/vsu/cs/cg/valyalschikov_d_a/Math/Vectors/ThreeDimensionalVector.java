@@ -1,5 +1,7 @@
 package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 
+import static java.lang.Math.abs;
+
 public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
 
     protected double a;
@@ -11,6 +13,7 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
         this.a = a;
         this.b = b;
         this.c = c;
+        roundVector();
         this.length = Math.pow(a*a + b*b + c*c, 0.5);
         if (length == 0){
             throw new RuntimeException("Zero vector");
@@ -99,6 +102,17 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
         double j = a * vector.getC() - c * vector.getA();
         double k = b * vector.getA() - a * vector.getB();
         return new ThreeDimensionalVector(i,-j,k);
+    }
+    private void roundVector(){
+        if (abs(a) < 0.0000000001){
+            a = 0;
+        }
+        if (abs(b) < 0.0000000001){
+            b = 0;
+        }
+        if (abs(c) < 0.0000000001){
+            c = 0;
+        }
     }
 
 

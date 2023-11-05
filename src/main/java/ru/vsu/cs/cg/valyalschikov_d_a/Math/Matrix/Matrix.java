@@ -10,4 +10,6 @@ public interface Matrix <T>{
     public Matrix<T> multiplyMatrix(Matrix<T> vector);
     public Matrix<T> transposition();
     public void printMatrix();
+    public double getDeterminant();
+    public Matrix<T> inverseMatrix();
 }

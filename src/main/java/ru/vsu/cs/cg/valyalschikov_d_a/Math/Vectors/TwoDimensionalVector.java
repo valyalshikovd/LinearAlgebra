@@ -1,5 +1,7 @@
 package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 
+import static java.lang.Math.abs;
+
 public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
 
     protected  double a;
@@ -17,10 +19,12 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
     public TwoDimensionalVector(double a, double b) {
         this.a = a;
         this.b = b;
+        roundVector();
         this.length = Math.pow(a*a + b*b, 0.5);
         if (length == 0){
             throw new RuntimeException("Zero vector");
         }
+
     }
     public static TwoDimensionalVector addition(TwoDimensionalVector a, TwoDimensionalVector b){
         return new TwoDimensionalVector(a.getA() + b.getA(), a.getB() + b.getB());
@@ -77,6 +81,13 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
     public double cosAngleBetweenVectors(TwoDimensionalVector vector) {
         return (this.scalarProduct(vector))/(this.length*vector.length);
     }
-
+    private void roundVector(){
+        if (abs(a) < 0.0000000001){
+            a = 0;
+        }
+        if (abs(b) < 0.0000000001){
+            b = 0;
+        }
+    }
 
 }

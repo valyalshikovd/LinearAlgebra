@@ -3,6 +3,8 @@ package ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.ThreeDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 
+import static java.lang.Math.abs;
+
 public class ThreeDimensionalMatrix implements Matrix<ThreeDimensionalMatrix> {
 
     private int dimensional;
@@ -43,7 +45,6 @@ public class ThreeDimensionalMatrix implements Matrix<ThreeDimensionalMatrix> {
     public Vector<ThreeDimensionalVector>[] getMatrixInVectors() {
         return matrixInVectors;
     }
-
 
 
     @Override
@@ -109,7 +110,7 @@ public class ThreeDimensionalMatrix implements Matrix<ThreeDimensionalMatrix> {
 
     }
 
-    @Override
+    //    @Override
     public void printMatrix() {
         System.out.println("-----------");
         System.out.println(vector1.getA() + " " + vector2.getA() + " " + vector3.getA());
@@ -118,8 +119,56 @@ public class ThreeDimensionalMatrix implements Matrix<ThreeDimensionalMatrix> {
         System.out.println("-----------");
     }
 
-    public double getDeterminant(){
-        return vector1.getA() * vector2.getB() * vector3.getC() + vector2.getA() * vector3.getB() * vector1.getC() +  vector3.getA() * vector1.getB() * vector2.getC() -
-                vector3.getA() * vector2.getB() * vector1.getC() -  vector1.getB() * vector2.getA() * vector3.getC() - vector1.getA() * vector2.getC() * vector3.getB();
+    @Override
+    public double getDeterminant() {
+        return vector1.getA() * vector2.getB() * vector3.getC() + vector2.getA() * vector3.getB() * vector1.getC() + vector3.getA() * vector1.getB() * vector2.getC() -
+                vector3.getA() * vector2.getB() * vector1.getC() - vector1.getB() * vector2.getA() * vector3.getC() - vector1.getA() * vector2.getC() * vector3.getB();
+    }
+
+    @Override
+    public Matrix<ThreeDimensionalMatrix> inverseMatrix() {
+        double determinant = getDeterminant();
+        if (abs(determinant) < 0.000001) {
+            throw new RuntimeException("Zero determinant");
+        }
+
+        ThreeDimensionalMatrix matrixMinors =
+                new ThreeDimensionalMatrix(
+                        new ThreeDimensionalVector(
+                                vector2.getB() * vector3.getC() - vector3.getB() * vector2.getC(),
+                                -(vector2.getA() * vector3.getC() - vector3.getA() * vector2.getC()),
+                                -vector2.getB() * vector3.getA() + vector3.getB() * vector2.getA()),
+                        new ThreeDimensionalVector(
+                                -(vector1.getB() * vector3.getC() - vector1.getC() * vector3.getB()),
+                                (vector1.getA() * vector3.getC() - vector1.getC() * vector3.getA()),
+                                -vector1.getB() * vector3.getA() + vector1.getB() * vector3.getA()),
+                        new ThreeDimensionalVector(
+                                vector1.getB() * vector2.getC() - vector1.getC() * vector2.getB(),
+                                -(vector1.getA() * vector2.getC() - vector1.getC() * vector2.getA()),
+                                -vector1.getB() * vector2.getA() + vector1.getA() * vector2.getB())
+                );
+        matrixMinors = (ThreeDimensionalMatrix) matrixMinors.transposition();
+        return matrixMinors.multiplyVector(new ThreeDimensionalVector(1 / determinant, 1 / determinant, 1 / determinant));
+    }
+
+
+    public void methodGauss() {
+        if (abs(getDeterminant()) < 0.000001) {
+            throw new RuntimeException("Zero determinant");
+        }
+        ThreeDimensionalVector mainVector = null;
+        for (int i = 0; i < matrixInVectors.length; i++) {
+            if(matrixInVectors[i].getA() == 0 &&
+                    matrixInVectors[i].getA() == 0 &&
+                    matrixInVectors[i].getA() == 0){
+                continue;
+            }
+            matrixInVectors[i].scale(1.0 / matrixInVectors[i].getB());
+            for (int k = i + 1; k < matrixInVectors.length; k++ ){
+                matrixInVectors[k].subtraction(matrixInVectors[i]);
+            }
+        }
+        this.printMatrix();
+
     }
 }

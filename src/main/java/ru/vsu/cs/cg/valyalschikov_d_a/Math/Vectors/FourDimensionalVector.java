@@ -1,5 +1,7 @@
 package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 
+import static java.lang.Math.abs;
+
 public class FourDimensionalVector implements Vector<FourDimensionalVector>{
     protected double a;
     protected double b;
@@ -11,7 +13,9 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
         this.b = b;
         this.c = c;
         this.d = d;
+        roundVector();
         this.length = Math.pow(a*a + b*b + c*c + d*d, 0.5);
+        System.out.println(a+" "+b+" "+c+" "+d);
         if (length == 0){
             throw new RuntimeException("Zero vector");
         }
@@ -101,5 +105,19 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
     @Override
     public double[] getArrValues() {
         return new double[]{a,b,c,d};
+    }
+    private void roundVector(){
+        if (abs(a) < 0.0000000001){
+            a = 0;
+        }
+        if (abs(b) < 0.0000000001){
+            b = 0;
+        }
+        if (abs(c) < 0.0000000001){
+            c = 0;
+        }
+        if (abs(d) < 0.0000000001){
+            d = 0;
+        }
     }
 }

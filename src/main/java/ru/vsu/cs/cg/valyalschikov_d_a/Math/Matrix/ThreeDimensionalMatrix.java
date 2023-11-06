@@ -150,25 +150,4 @@ public class ThreeDimensionalMatrix implements Matrix<ThreeDimensionalMatrix> {
         matrixMinors = (ThreeDimensionalMatrix) matrixMinors.transposition();
         return matrixMinors.multiplyVector(new ThreeDimensionalVector(1 / determinant, 1 / determinant, 1 / determinant));
     }
-
-
-    public void methodGauss() {
-        if (abs(getDeterminant()) < 0.000001) {
-            throw new RuntimeException("Zero determinant");
-        }
-        ThreeDimensionalVector mainVector = null;
-        for (int i = 0; i < matrixInVectors.length; i++) {
-            if(matrixInVectors[i].getA() == 0 &&
-                    matrixInVectors[i].getA() == 0 &&
-                    matrixInVectors[i].getA() == 0){
-                continue;
-            }
-            matrixInVectors[i].scale(1.0 / matrixInVectors[i].getB());
-            for (int k = i + 1; k < matrixInVectors.length; k++ ){
-                matrixInVectors[k].subtraction(matrixInVectors[i]);
-            }
-        }
-        this.printMatrix();
-
-    }
 }

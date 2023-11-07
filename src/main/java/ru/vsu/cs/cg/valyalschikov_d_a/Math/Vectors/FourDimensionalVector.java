@@ -1,5 +1,7 @@
 package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 
+import java.util.Objects;
+
 import static java.lang.Math.abs;
 
 public class FourDimensionalVector implements Vector<FourDimensionalVector>{
@@ -15,7 +17,6 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
         this.d = d;
         roundVector();
         this.length = Math.pow(a*a + b*b + c*c + d*d, 0.5);
-        System.out.println(a+" "+b+" "+c+" "+d);
         if (length == 0){
             throw new RuntimeException("Zero vector");
         }
@@ -120,4 +121,13 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
             d = 0;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FourDimensionalVector that = (FourDimensionalVector) o;
+        return Double.compare(that.a, a) == 0 && Double.compare(that.b, b) == 0 && Double.compare(that.c, c) == 0 && Double.compare(that.d, d) == 0;
+    }
+
 }

@@ -1,8 +1,10 @@
 package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 
+import java.util.Objects;
+
 import static java.lang.Math.abs;
 
-public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
+public class TwoDimensionalVector implements Vector<TwoDimensionalVector>  {
 
     protected  double a;
     protected double b;
@@ -88,6 +90,14 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector> {
         if (abs(b) < 0.0000000001){
             b = 0;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TwoDimensionalVector vector = (TwoDimensionalVector) o;
+        return Double.compare(vector.a, a) == 0 && Double.compare(vector.b, b) == 0;
     }
 
 }

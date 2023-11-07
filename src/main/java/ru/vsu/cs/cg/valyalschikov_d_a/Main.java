@@ -25,9 +25,8 @@ public class Main {
                 new ThreeDimensionalVector(4, -2, -6),
                 new ThreeDimensionalVector(2, 0, 3)
         );
-        // matrix1.multiplyMatrix(matrix2).transposition().printMatrix();
-
-
+         matrix1.multiplyMatrix(matrix2).transposition().printMatrix();
+        System.out.println("----------------------------------------");
         ThreeDimensionalMatrix matrix3 = new ThreeDimensionalMatrix(
                 new ThreeDimensionalVector(2, -3, 1),
                 new ThreeDimensionalVector(4, 6, 0),
@@ -90,6 +89,13 @@ public class Main {
                 new FourDimensionalVector(6, 7, 3, 7),
                 new FourDimensionalVector(8, 10, 0, 4)
         );
+        System.out.println("обратная");
+        fourDimensionalMatrix.inverseMatrix().printMatrix();
+
+        System.out.println("транспонирование");
+        fourDimensionalMatrix.transposition().printMatrix();
+
+
         fourDimensionalMatrix = (FourDimensionalMatrix) fourDimensionalMatrix.multiplyMatrix(fourDimensionalMatrix.inverseMatrix());
         fourDimensionalMatrix.printMatrix();
 
@@ -101,11 +107,7 @@ public class Main {
         );
         System.out.println(matrix6.getDeterminant());
 
-        new ThreeDimensionalMatrix(
-                new ThreeDimensionalVector(4,3,-2),
-                new ThreeDimensionalVector(1,2,1),
-                new ThreeDimensionalVector(3,2,1)
-        ).methodGauss();
+
     }
 
 }

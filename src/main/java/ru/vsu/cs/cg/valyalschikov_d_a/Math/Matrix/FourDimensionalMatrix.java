@@ -279,8 +279,7 @@ public class FourDimensionalMatrix implements Matrix {
                         )
                 );
 
-        System.out.println(determinant);
-        matrixMinors.transposition().printMatrix();
+
         matrixMinors = (FourDimensionalMatrix) matrixMinors.transposition();
         return matrixMinors.multiplyVector(new FourDimensionalVector(1 / determinant, 1 / determinant,1 / determinant,1 / determinant));
     }

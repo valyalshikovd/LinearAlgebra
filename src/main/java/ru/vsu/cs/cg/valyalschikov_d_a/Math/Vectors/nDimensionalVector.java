@@ -3,6 +3,8 @@ package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static java.lang.Math.abs;
+
 public class nDimensionalVector implements Vector<nDimensionalVector>{
 
     protected double[] values;
@@ -24,6 +26,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
         for (double value : values)
             length += value * value;
         length = Math.pow(length, 0.5);
+        roundVector();
     }
 
     @Override
@@ -112,6 +115,14 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
             }
         }
         return true;
+    }
+    private void roundVector(){
+        for (int i = 0; i < dimensional; i++){
+            if(abs(values[i]) < 0.0000000001){
+                values[i] = 0;
+            }
+        }
+
     }
 
 

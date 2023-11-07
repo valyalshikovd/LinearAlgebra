@@ -4,6 +4,8 @@ import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.ThreeDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.nDimensionalVector;
 
+import static java.lang.Math.abs;
+
 public class nDimensionalMatrix implements Matrix<nDimensionalMatrix> {
     int dimensional;
     protected nDimensionalVector[] matrixInVectors;
@@ -67,10 +69,8 @@ public class nDimensionalMatrix implements Matrix<nDimensionalMatrix> {
             for (int j = 0; j < dimensional; j++) {
                 double sum = 0;
                 for (int k = 0; k < dimensional; k++) {
-                    System.out.println(sum);
                     sum += getMatrixInVectors()[i].getArrValues()[k] * matrix.getMatrixInVectors()[k].getArrValues()[j];
                 }
-                System.out.println("---");
                 values[j] = sum;
             }
             newVectors[i] = new nDimensionalVector(values);
@@ -131,22 +131,63 @@ public class nDimensionalMatrix implements Matrix<nDimensionalMatrix> {
             }
 
             nDimensionalMatrix tmp = new nDimensionalMatrix(vectors);
-            tmp.printMatrix();
             double tmpDeter = tmp.getDeterminant();
-            System.out.println(tmpDeter);
             if (k % 2 == 0) {
                 deter -= tmpDeter * matrixInVectors[0].getArrValues()[k];
             } else {
                 deter += tmpDeter * matrixInVectors[0].getArrValues()[k];
             }
-            System.out.println(deter);
         }
         return deter;
     }
 
     @Override
     public Matrix<nDimensionalMatrix> inverseMatrix() {
-        return null;
+        double determinant = this.getDeterminant();
+        if (abs(determinant) < 0.000001){
+            throw new RuntimeException("Zero determinant");
+        }
+        nDimensionalVector[] vectors = new nDimensionalVector[dimensional];
+
+        for (int i = 0; i < dimensional; i++){
+
+            double[] values = new double[dimensional];
+            for (int j = 0; j < dimensional; j++){
+                nDimensionalVector[] vectors1 = new nDimensionalVector[dimensional - 1];
+                int counter = 0;
+                for (int k = 0; k < dimensional; k++){
+                    if(j == k){
+                        continue;
+                    }
+                    double[] values1 = new double[dimensional - 1];
+
+                    int counter1 = 0;
+
+                    for (int p = 0; p < dimensional; p++){
+                        if(i == p){
+                            continue;
+                        }
+                        values1[counter1] = matrixInVectors[p].getArrValues()[k];
+                        counter1++;
+                    }
+
+                    vectors1[counter] = new nDimensionalVector(values1);
+                    counter++;
+                }
+                values[j] = new nDimensionalMatrix(vectors1).getDeterminant() * Math.pow(-1, i+j+1);
+            }
+            vectors[i] = new nDimensionalVector(values);
+        }
+        nDimensionalMatrix matrixMinor = new nDimensionalMatrix(vectors);
+        matrixMinor = (nDimensionalMatrix) matrixMinor.transposition();
+        double[] values2 = new double[dimensional];
+        for (int i = 0; i < dimensional; i++){
+            values2[i] = 1/determinant;
+        }
+        System.out.println(determinant + "det");
+
+        return matrixMinor.multiplyVector(new nDimensionalVector(values2));
     }
+
 
 }

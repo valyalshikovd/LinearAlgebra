@@ -160,7 +160,10 @@ public class Main {
                 new nDimensionalVector(-9,2,1)
         );
 
-        System.out.println(ndMatrix2.getDeterminant() + "final");
+       // System.out.println(ndMatrix2.getDeterminant() + "final");
+        nd5Matrix.inverseMatrix().printMatrix();
+
+        nd5Matrix.multiplyMatrix(nd5Matrix.inverseMatrix()).printMatrix();
     }
 
 }

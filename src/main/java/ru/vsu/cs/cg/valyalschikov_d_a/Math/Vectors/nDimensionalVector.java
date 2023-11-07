@@ -9,8 +9,15 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     protected int dimensional;
     protected double length;
 
+    public int getDimensional() {
+        return dimensional;
+    }
+
     public nDimensionalVector(double ...args){
         dimensional = args.length;
+        if(dimensional < 2){
+            throw new RuntimeException("Нельзя создать вектор размерностью меньше 2ух");
+        }
         values = args;
 
         length = 0;
@@ -21,7 +28,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
 
     @Override
     public double[] getArrValues() {
-        return new double[0];
+        return values;
     }
 
     @Override
@@ -30,7 +37,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
             throw  new RuntimeException("Размерности векторов не совпадают");
         }
         double[] newValues = new double[dimensional];
-        for(int i = 0; i < length; i++){
+        for(int i = 0; i < dimensional ; i++){
             newValues[i] = values[i] - vector.values[i];
         }
         return  new nDimensionalVector(newValues);
@@ -42,7 +49,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
             throw  new RuntimeException("Размерности векторов не совпадают");
         }
         double[] newValues = new double[dimensional];
-        for(int i = 0; i < length; i++){
+        for(int i = 0; i < dimensional ; i++){
             newValues[i] = values[i] + vector.values[i];
         }
         return  new nDimensionalVector(newValues);
@@ -51,7 +58,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     @Override
     public nDimensionalVector scale(double a) {
         double[] newValues = new double[dimensional];
-        for(int i = 0; i < length; i++){
+        for(int i = 0; i < dimensional; i++){
             newValues[i] = values[i] * a;
         }
         return  new nDimensionalVector(newValues);
@@ -65,7 +72,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     @Override
     public nDimensionalVector normalization() {
         double[] newValues = new double[dimensional];
-        for(int i = 0; i < length; i++){
+        for(int i = 0; i < dimensional ; i++){
             newValues[i] = values[i] / length;
         }
         return  new nDimensionalVector(newValues);
@@ -77,8 +84,8 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
             throw  new RuntimeException("Размерности векторов не совпадают");
         }
         double scalarProd = 0;
-        for(int i = 0; i < length; i++){
-            scalarProd = values[i] * vector.values[i];
+        for(int i = 0; i < dimensional; i++){
+            scalarProd += values[i] * vector.values[i];
         }
         return  scalarProd;
     }
@@ -96,7 +103,15 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         nDimensionalVector that = (nDimensionalVector) o;
-        return dimensional == that.dimensional && Arrays.equals(values, that.values);
+        if(dimensional != that.dimensional){
+            return false;
+        }
+        for(int i = 0; i < dimensional; i++){
+            if(that.values[i] != values[i]){
+                return false;
+            }
+        }
+        return true;
     }
 
 

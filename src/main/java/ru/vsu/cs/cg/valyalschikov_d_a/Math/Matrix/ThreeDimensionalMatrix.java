@@ -2,6 +2,7 @@ package ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix;
 
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.ThreeDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
+import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.nDimensionalVector;
 
 import static java.lang.Math.abs;
 
@@ -76,26 +77,25 @@ public class ThreeDimensionalMatrix implements Matrix<ThreeDimensionalMatrix> {
 
     @Override
     public Matrix<ThreeDimensionalMatrix> multiplyMatrix(Matrix<ThreeDimensionalMatrix> matrix) {
-        Vector[] vectors = matrix.getMatrixInVectors();
-
-
-        ThreeDimensionalVector resVector1 = new ThreeDimensionalVector(
-                vectors[0].getArrValues()[0] * vector1.getA() + vectors[1].getArrValues()[0] * vector1.getB() + vectors[2].getArrValues()[0] * vector1.getC(),
-                vectors[0].getArrValues()[1] * vector1.getA() + vectors[1].getArrValues()[1] * vector1.getB() + vectors[2].getArrValues()[1] * vector1.getC(),
-                vectors[0].getArrValues()[2] * vector1.getA() + vectors[1].getArrValues()[2] * vector1.getB() + vectors[2].getArrValues()[2] * vector1.getC());
-
-        ThreeDimensionalVector resVector2 = new ThreeDimensionalVector(
-                vectors[0].getArrValues()[0] * vector2.getA() + vectors[1].getArrValues()[0] * vector2.getB() + vectors[2].getArrValues()[0] * vector2.getC(),
-                vectors[0].getArrValues()[1] * vector2.getA() + vectors[1].getArrValues()[1] * vector2.getB() + vectors[2].getArrValues()[1] * vector2.getC(),
-                vectors[0].getArrValues()[2] * vector2.getA() + vectors[1].getArrValues()[2] * vector2.getB() + vectors[2].getArrValues()[2] * vector2.getC());
-
-
-        ThreeDimensionalVector resVector3 = new ThreeDimensionalVector(
-                vectors[0].getArrValues()[0] * vector3.getA() + vectors[1].getArrValues()[0] * vector3.getB() + vectors[2].getArrValues()[0] * vector3.getC(),
-                vectors[0].getArrValues()[1] * vector3.getA() + vectors[1].getArrValues()[1] * vector3.getB() + vectors[2].getArrValues()[1] * vector3.getC(),
-                vectors[0].getArrValues()[2] * vector3.getA() + vectors[1].getArrValues()[2] * vector3.getB() + vectors[2].getArrValues()[2] * vector3.getC());
-
-        return new ThreeDimensionalMatrix(resVector1, resVector2, resVector3);
+        if(dimensional != matrix.getDimensional()){
+            throw new RuntimeException("Неправильная размерность матрицы");
+        }
+        ThreeDimensionalVector[] newVectors = new ThreeDimensionalVector[dimensional];
+        for (int i = 0; i < dimensional; i++){
+            double[] values = new double[dimensional];
+            for (int j = 0; j < dimensional; j++){
+                double sum = 0;
+                for(int k = 0; k < dimensional; k++){
+                    System.out.println(sum);
+                    //  sum += getMatrixInVectors()[k].getArrValues()[j] * matrix.getMatrixInVectors()[i].getArrValues()[k];
+                    sum += getMatrixInVectors()[i].getArrValues()[k] * matrix.getMatrixInVectors()[k].getArrValues()[j];
+                }
+                System.out.println("---");
+                values[j] = sum;
+            }
+            newVectors[i] = new ThreeDimensionalVector(values[0],values[1],values[2]);
+        }
+        return new ThreeDimensionalMatrix(newVectors[0],newVectors[1],newVectors[2]);
     }
 
     @Override

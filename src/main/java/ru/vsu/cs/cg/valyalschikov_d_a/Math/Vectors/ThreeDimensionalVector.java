@@ -17,9 +17,6 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
         this.c = c;
         roundVector();
         this.length = Math.pow(a*a + b*b + c*c, 0.5f);
-        if (length == 0){
-            throw new RuntimeException("Zero vector");
-        }
     }
 
     public double getA() {

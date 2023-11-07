@@ -62,38 +62,25 @@ public class FourDimensionalMatrix implements Matrix {
 
     @Override
     public Matrix multiplyMatrix(Matrix matrix) {
-        if (matrix.getDimensional() != 4) {
-            throw new RuntimeException("Матрица не той размерности");
+        if(dimensional != matrix.getDimensional()){
+            throw new RuntimeException("Неправильная размерность матрицы");
         }
-        Vector[] vectors = matrix.getMatrixInVectors();
-
-
-        FourDimensionalVector resVector1 = new FourDimensionalVector(
-                vectors[0].getArrValues()[0] * vector1.getA() + vectors[1].getArrValues()[0] * vector1.getB() + vectors[2].getArrValues()[0] * vector1.getC() + vectors[3].getArrValues()[0] * vector1.getD(),
-                vectors[0].getArrValues()[1] * vector1.getA() + vectors[1].getArrValues()[1] * vector1.getB() + vectors[2].getArrValues()[1] * vector1.getC() + vectors[3].getArrValues()[1] * vector1.getD(),
-                vectors[0].getArrValues()[2] * vector1.getA() + vectors[1].getArrValues()[2] * vector1.getB() + vectors[2].getArrValues()[2] * vector1.getC() + vectors[3].getArrValues()[2] * vector1.getD(),
-                vectors[0].getArrValues()[3] * vector1.getA() + vectors[1].getArrValues()[3] * vector1.getB() + vectors[2].getArrValues()[3] * vector1.getC() + vectors[3].getArrValues()[3] * vector1.getD());
-
-        FourDimensionalVector resVector2 = new FourDimensionalVector(
-                vectors[0].getArrValues()[0] * vector2.getA() + vectors[1].getArrValues()[0] * vector2.getB() + vectors[2].getArrValues()[0] * vector2.getC() + vectors[3].getArrValues()[0] * vector2.getD(),
-                vectors[0].getArrValues()[1] * vector2.getA() + vectors[1].getArrValues()[1] * vector2.getB() + vectors[2].getArrValues()[1] * vector2.getC() + vectors[3].getArrValues()[1] * vector2.getD(),
-                vectors[0].getArrValues()[2] * vector2.getA() + vectors[1].getArrValues()[2] * vector2.getB() + vectors[2].getArrValues()[2] * vector2.getC() + vectors[3].getArrValues()[2] * vector2.getD(),
-                vectors[0].getArrValues()[3] * vector2.getA() + vectors[1].getArrValues()[3] * vector2.getB() + vectors[2].getArrValues()[3] * vector2.getC() + vectors[3].getArrValues()[3] * vector2.getD());
-
-
-        FourDimensionalVector resVector3 = new FourDimensionalVector(
-                vectors[0].getArrValues()[0] * vector3.getA() + vectors[1].getArrValues()[0] * vector3.getB() + vectors[2].getArrValues()[0] * vector3.getC()  + vectors[3].getArrValues()[0] * vector3.getD(),
-                vectors[0].getArrValues()[1] * vector3.getA() + vectors[1].getArrValues()[1] * vector3.getB() + vectors[2].getArrValues()[1] * vector3.getC() + vectors[3].getArrValues()[1] * vector3.getD(),
-                vectors[0].getArrValues()[2] * vector3.getA() + vectors[1].getArrValues()[2] * vector3.getB() + vectors[2].getArrValues()[2] * vector3.getC() + vectors[3].getArrValues()[2] * vector3.getD(),
-                vectors[0].getArrValues()[3] * vector3.getA() + vectors[1].getArrValues()[3] * vector3.getB() + vectors[2].getArrValues()[3] * vector3.getC() + vectors[3].getArrValues()[3] * vector3.getD());
-
-        FourDimensionalVector resVector4 = new FourDimensionalVector(
-                vectors[0].getArrValues()[0] * vector4.getA() + vectors[1].getArrValues()[0] * vector4.getB() + vectors[2].getArrValues()[0] * vector4.getC()  + vectors[3].getArrValues()[0] * vector4.getD(),
-                vectors[0].getArrValues()[1] * vector4.getA() + vectors[1].getArrValues()[1] * vector4.getB() + vectors[2].getArrValues()[1] * vector4.getC() + vectors[3].getArrValues()[1] * vector4.getD(),
-                vectors[0].getArrValues()[2] * vector4.getA() + vectors[1].getArrValues()[2] * vector4.getB() + vectors[2].getArrValues()[2] * vector4.getC() + vectors[3].getArrValues()[2] * vector4.getD(),
-                vectors[0].getArrValues()[3] * vector4.getA() + vectors[1].getArrValues()[3] * vector4.getB() + vectors[2].getArrValues()[3] * vector4.getC() + vectors[3].getArrValues()[3] * vector4.getD());
-
-        return new FourDimensionalMatrix(resVector1, resVector2, resVector3, resVector4);
+        FourDimensionalVector[] newVectors = new FourDimensionalVector[dimensional];
+        for (int i = 0; i < dimensional; i++){
+            double[] values = new double[dimensional];
+            for (int j = 0; j < dimensional; j++){
+                double sum = 0;
+                for(int k = 0; k < dimensional; k++){
+                    System.out.println(sum);
+                    //  sum += getMatrixInVectors()[k].getArrValues()[j] * matrix.getMatrixInVectors()[i].getArrValues()[k];
+                    sum += getMatrixInVectors()[i].getArrValues()[k] * matrix.getMatrixInVectors()[k].getArrValues()[j];
+                }
+                System.out.println("---");
+                values[j] = sum;
+            }
+            newVectors[i] = new FourDimensionalVector(values[0],values[1],values[2],values[3]);
+        }
+        return new FourDimensionalMatrix(newVectors[0],newVectors[1],newVectors[2],newVectors[3]);
     }
 
     @Override

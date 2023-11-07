@@ -23,9 +23,7 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector>  {
         this.b = b;
         roundVector();
         this.length = Math.pow(a*a + b*b, 0.5);
-        if (length == 0){
-            throw new RuntimeException("Zero vector");
-        }
+
 
     }
     public static TwoDimensionalVector addition(TwoDimensionalVector a, TwoDimensionalVector b){

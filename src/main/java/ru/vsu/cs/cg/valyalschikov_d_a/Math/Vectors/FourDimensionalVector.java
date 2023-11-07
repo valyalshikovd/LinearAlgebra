@@ -17,9 +17,6 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
         this.d = d;
         roundVector();
         this.length = Math.pow(a*a + b*b + c*c + d*d, 0.5);
-        if (length == 0){
-            throw new RuntimeException("Zero vector");
-        }
     }
 
     public double getA() {

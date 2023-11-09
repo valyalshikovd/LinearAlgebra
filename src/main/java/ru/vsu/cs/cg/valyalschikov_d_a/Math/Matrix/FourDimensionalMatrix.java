@@ -167,7 +167,7 @@ public class FourDimensionalMatrix implements Matrix {
     @Override
     public Matrix inverseMatrix(){
         double determinant = this.getDeterminant();
-        if (abs(determinant) < 0.000001){
+        if (abs(determinant) < 0.0000001){
             throw new RuntimeException("Zero determinant");
         }
 

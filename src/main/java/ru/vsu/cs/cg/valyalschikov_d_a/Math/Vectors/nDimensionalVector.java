@@ -18,7 +18,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     public nDimensionalVector(double ...args){
         dimensional = args.length;
         if(dimensional < 2){
-            throw new RuntimeException("Нельзя создать вектор размерностью меньше 2ух");
+            throw new ArithmeticException("Нельзя создать вектор размерностью меньше 2й размерности");
         }
         values = args;
 
@@ -37,7 +37,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     @Override
     public nDimensionalVector subtraction(nDimensionalVector vector) {
         if (vector.dimensional != dimensional){
-            throw  new RuntimeException("Размерности векторов не совпадают");
+            throw  new ArithmeticException("Размерности векторов не совпадают");
         }
         double[] newValues = new double[dimensional];
         for(int i = 0; i < dimensional ; i++){
@@ -49,7 +49,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     @Override
     public nDimensionalVector addition(nDimensionalVector vector) {
         if (vector.dimensional != dimensional){
-            throw  new RuntimeException("Размерности векторов не совпадают");
+            throw  new ArithmeticException("Размерности векторов не совпадают");
         }
         double[] newValues = new double[dimensional];
         for(int i = 0; i < dimensional ; i++){
@@ -84,7 +84,7 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     @Override
     public double scalarProduct(nDimensionalVector vector) {
         if (vector.dimensional != dimensional){
-            throw  new RuntimeException("Размерности векторов не совпадают");
+            throw  new ArithmeticException("Размерности векторов не совпадают");
         }
         double scalarProd = 0;
         for(int i = 0; i < dimensional; i++){
@@ -96,7 +96,10 @@ public class nDimensionalVector implements Vector<nDimensionalVector>{
     @Override
     public double cosAngleBetweenVectors(nDimensionalVector vector) {
         if (vector.dimensional != dimensional){
-            throw  new RuntimeException("Размерности векторов не совпадают");
+            throw new ArithmeticException("Размерности векторов не совпадают");
+        }
+        if (length == 0 || vector.length == 0) {
+            throw new ArithmeticException("Нулевой вектор");
         }
         return scalarProduct(vector)/(length * vector.length);
     }

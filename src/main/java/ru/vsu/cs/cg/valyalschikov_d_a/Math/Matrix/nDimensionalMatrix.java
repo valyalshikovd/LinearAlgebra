@@ -4,6 +4,9 @@ import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.ThreeDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.nDimensionalVector;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 import static java.lang.Math.abs;
 
 public class nDimensionalMatrix implements Matrix<nDimensionalMatrix> {
@@ -184,10 +187,30 @@ public class nDimensionalMatrix implements Matrix<nDimensionalMatrix> {
         for (int i = 0; i < dimensional; i++){
             values2[i] = 1/determinant;
         }
-        System.out.println(determinant + "det");
-
         return matrixMinor.multiplyVector(new nDimensionalVector(values2));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        nDimensionalMatrix that = (nDimensionalMatrix) o;
+        if(dimensional != that.getDimensional()){
+            return false;
+        };
+        for(int i = 0; i < dimensional; i++){
+            if(!matrixInVectors[i].equals(that.matrixInVectors[i])){
+                return false;
+            }
 
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(dimensional);
+        result = 31 * result + Arrays.hashCode(matrixInVectors);
+        return result;
+    }
 }

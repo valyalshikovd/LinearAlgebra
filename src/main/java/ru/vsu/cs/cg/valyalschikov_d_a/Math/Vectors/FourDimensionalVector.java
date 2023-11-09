@@ -98,6 +98,9 @@ public class FourDimensionalVector implements Vector<FourDimensionalVector>{
 
     @Override
     public double cosAngleBetweenVectors(FourDimensionalVector vector) {
+        if (length == 0 || vector.length == 0) {
+            throw new ArithmeticException("Нулевой вектор");
+        }
         return (scalarProduct(vector))/(this.length*vector.length);
     }
     @Override

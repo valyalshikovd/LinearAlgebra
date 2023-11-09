@@ -89,6 +89,9 @@ public class ThreeDimensionalVector implements Vector<ThreeDimensionalVector>{
 
     @Override
     public double cosAngleBetweenVectors(ThreeDimensionalVector vector) {
+        if (length == 0 || vector.length == 0) {
+            throw new ArithmeticException("Нулевой вектор");
+        }
         return (this.scalarProduct(vector))/(this.length*vector.length);
     }
     @Override

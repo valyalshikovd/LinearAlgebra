@@ -79,6 +79,9 @@ public class TwoDimensionalVector implements Vector<TwoDimensionalVector>  {
 
     @Override
     public double cosAngleBetweenVectors(TwoDimensionalVector vector) {
+        if (length == 0 || vector.length == 0) {
+            throw new ArithmeticException("Нулевой вектор");
+        }
         return (this.scalarProduct(vector))/(this.length*vector.length);
     }
     private void roundVector(){

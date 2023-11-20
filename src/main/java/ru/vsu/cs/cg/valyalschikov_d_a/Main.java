@@ -2,10 +2,10 @@ package ru.vsu.cs.cg.valyalschikov_d_a;
 
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix.FourDimensionalMatrix;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix.ThreeDimensionalMatrix;
-import ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix.nDimensionalMatrix;
+import ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix.NDimensionalMatrix;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.FourDimensionalVector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.ThreeDimensionalVector;
-import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.nDimensionalVector;
+import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.NDimensionalVector;
 
 import java.util.Arrays;
 
@@ -110,43 +110,43 @@ public class Main {
         System.out.println(matrix6.getDeterminant());
 
 
-        nDimensionalMatrix ndMatrix1 = new nDimensionalMatrix(
-                new nDimensionalVector(1, 36, 35, 34, 33, 32, 31, 30),
-                new nDimensionalVector(2, 2, 24, 25, 26, 27, 27, 29),
-                new nDimensionalVector(2, 42, 3, 23, 22, 21, 20, 19),
-                new nDimensionalVector(2, 42, 32, 4, 15, 16, 17, 18),
-                new nDimensionalVector(2, 42, 32, 45, 5, 14, 13, 12),
-                new nDimensionalVector(2, 42, 32, 45, 46, 6, 11, 10),
-                new nDimensionalVector(2, 42, 32, 45, 46, 35, 7, 9),
-                new nDimensionalVector(2, 42, 32, 45, 46, 35, 67, 8)
-        );
-        ndMatrix1.multiplyVector(new nDimensionalVector(1, 2, 3, 4, 5, 6, 7, 8)).printMatrix();
-
-        nDimensionalMatrix ndMatrix2 = new nDimensionalMatrix(
-                new nDimensionalVector(1,12,13,25,26,1000),
-                new nDimensionalVector(2, 11,14,24,27,36),
-                new nDimensionalVector(3, 10, 15, 23, 28, 35),
-                new nDimensionalVector(4, 9, 100, 22, 29, 34),
-                new nDimensionalVector(55, 8, 17, 20, 30, 33),
-                new nDimensionalVector(6,7,18,19,334,32)
-
+        NDimensionalMatrix ndMatrix1 = new NDimensionalMatrix(
+                new NDimensionalVector(1, 36, 35, 34, 33, 32, 31, 30),
+                new NDimensionalVector(2, 2, 24, 25, 26, 27, 27, 29),
+                new NDimensionalVector(2, 42, 3, 23, 22, 21, 20, 19),
+                new NDimensionalVector(2, 42, 32, 4, 15, 16, 17, 18),
+                new NDimensionalVector(2, 42, 32, 45, 5, 14, 13, 12),
+                new NDimensionalVector(2, 42, 32, 45, 46, 6, 11, 10),
+                new NDimensionalVector(2, 42, 32, 45, 46, 35, 7, 9),
+                new NDimensionalVector(2, 42, 32, 45, 46, 35, 67, 8)
         );
 
-        nDimensionalMatrix ndMatrix3 = new nDimensionalMatrix(
-                new nDimensionalVector(12,2,1,22,1,3),
-                new nDimensionalVector(12,5,2,1,22,1),
-                new nDimensionalVector(13,5,4,2,1,22),
-                new nDimensionalVector(14,1,5,4,2,1),
-                new nDimensionalVector(15,1,1,5,4,2),
-                new nDimensionalVector(16,1,1,1,5,5)
+
+        NDimensionalMatrix ndMatrix2 = new NDimensionalMatrix(
+                new NDimensionalVector(1,12,13,25,26,1000),
+                new NDimensionalVector(2, 11,14,24,27,36),
+                new NDimensionalVector(3, 10, 15, 23, 28, 35),
+                new NDimensionalVector(4, 9, 100, 22, 29, 34),
+                new NDimensionalVector(55, 8, 17, 20, 30, 33),
+                new NDimensionalVector(6,7,18,19,334,32)
+
         );
-        nDimensionalMatrix ndMatrix4 = new nDimensionalMatrix(
-                new nDimensionalVector(1,0,0,0,0,0),
-                new nDimensionalVector(0,1,0,0,0,0),
-                new nDimensionalVector(0,0,1,0,0,0),
-                new nDimensionalVector(0,0,0,1,0,0),
-                new nDimensionalVector(0,0,0,0,1,0),
-                new nDimensionalVector(0,0,0,0,0,1)
+
+        NDimensionalMatrix ndMatrix3 = new NDimensionalMatrix(
+                new NDimensionalVector(12,2,1,22,1,3),
+                new NDimensionalVector(12,5,2,1,22,1),
+                new NDimensionalVector(13,5,4,2,1,22),
+                new NDimensionalVector(14,1,5,4,2,1),
+                new NDimensionalVector(15,1,1,5,4,2),
+                new NDimensionalVector(16,1,1,1,5,5)
+        );
+        NDimensionalMatrix ndMatrix4 = new NDimensionalMatrix(
+                new NDimensionalVector(1,0,0,0,0,0),
+                new NDimensionalVector(0,1,0,0,0,0),
+                new NDimensionalVector(0,0,1,0,0,0),
+                new NDimensionalVector(0,0,0,1,0,0),
+                new NDimensionalVector(0,0,0,0,1,0),
+                new NDimensionalVector(0,0,0,0,0,1)
         );
         ndMatrix2.multiplyMatrix(ndMatrix3).printMatrix();
 
@@ -154,10 +154,10 @@ public class Main {
 
 
 
-        nDimensionalMatrix nd5Matrix = new nDimensionalMatrix(
-                new nDimensionalVector(1,2,3),
-                new nDimensionalVector(2,1,2),
-                new nDimensionalVector(-9,2,1)
+        NDimensionalMatrix nd5Matrix = new NDimensionalMatrix(
+                new NDimensionalVector(1,2,3),
+                new NDimensionalVector(2,1,2),
+                new NDimensionalVector(-9,2,1)
         );
 
        // System.out.println(ndMatrix2.getDeterminant() + "final");

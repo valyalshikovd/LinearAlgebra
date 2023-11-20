@@ -2,14 +2,14 @@ package ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix;
 
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 
-public interface Matrix <T>{
-    public Vector<?>[] getMatrixInVectors();
+public interface Matrix {
+    public Vector[] getMatrixInVectors();
     public int getDimensional();
-    public Matrix<T> addition(Matrix<T> matrix);
-    public Matrix<T> multiplyVector(Vector<?> vector);
-    public Matrix<T> multiplyMatrix(Matrix<T> vector);
-    public Matrix<T> transposition();
+    public Matrix addition(Matrix matrix);
+    public Vector multiplyVector(Vector vector);
+    public Matrix multiplyMatrix(Matrix vector);
+    public Matrix transposition();
     public void printMatrix();
     public double getDeterminant();
-    public Matrix<T> inverseMatrix();
+    public Matrix inverseMatrix();
 }

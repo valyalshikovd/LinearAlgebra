@@ -8,12 +8,12 @@ import static java.lang.Math.abs;
 
 public class ThreeDimensionalMatrix extends NDimensionalMatrix {
 
-    private int dimensional;
-    protected ThreeDimensionalVector[] matrixInVectors;
 
-    ThreeDimensionalVector vector1;
-    ThreeDimensionalVector vector2;
-    ThreeDimensionalVector vector3;
+
+
+    final private ThreeDimensionalVector vector1;
+    final private ThreeDimensionalVector vector2;
+    final private ThreeDimensionalVector vector3;
 
     public ThreeDimensionalMatrix(ThreeDimensionalVector vector1,
                                   ThreeDimensionalVector vector2,
@@ -48,4 +48,15 @@ public class ThreeDimensionalMatrix extends NDimensionalMatrix {
         return matrixInVectors;
     }
 
+    public ThreeDimensionalVector getVector1() {
+        return vector1;
+    }
+
+    public ThreeDimensionalVector getVector2() {
+        return vector2;
+    }
+
+    public ThreeDimensionalVector getVector3() {
+        return vector3;
+    }
 }

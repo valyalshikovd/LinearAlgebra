@@ -8,12 +8,10 @@ import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 import static java.lang.Math.abs;
 
 public class FourDimensionalMatrix extends NDimensionalMatrix {
-    private int dimensional;
-    private Vector[] matrixInVectors;
-    private Vector vector1;
-    private Vector vector2;
-    private Vector vector3;
-    private Vector vector4;
+    final private Vector vector1;
+    final private Vector vector2;
+    final private Vector vector3;
+    final private Vector vector4;
 
     public FourDimensionalMatrix(
             Vector vector1,

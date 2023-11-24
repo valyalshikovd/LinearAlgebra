@@ -6,10 +6,10 @@ import ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix.Matrix;
 import static java.lang.Math.abs;
 
 public class FourDimensionalVector extends NDimensionalVector{
-    protected double a;
-    protected double b;
-    protected double c;
-    protected double d;
+    final private double a;
+    final private double b;
+    final private double c;
+    final private double d;
     public FourDimensionalVector(double a, double b, double c, double d){
         super(a,b,c,d);
         this.a = a;

@@ -1,20 +1,18 @@
 package ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix;
 
-import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.FourDimensionalVector;
+
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.Vector;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.NDimensionalVector;
-
 import java.util.Arrays;
-import java.util.HashMap;
 
 import static java.lang.Math.abs;
 
 public class NDimensionalMatrix implements Matrix {
-    int dimensional;
-    public static HashMap<Integer, Double> memoizeDeter = new HashMap<>();
+    protected int dimensional;
     protected Vector[] matrixInVectors;
 
-    public NDimensionalMatrix(Vector ...vectors) {
+    public NDimensionalMatrix( Vector ...vectors) {
+
         dimensional = vectors.length;
         matrixInVectors = vectors;
         if(dimensional < 1){
@@ -26,17 +24,6 @@ public class NDimensionalMatrix implements Matrix {
             }
         }
     }
-
-//    public NDimensionalMatrix(int dimensional){
-//        NDimensionalVector[] newArr = new NDimensionalVector[dimensional];
-//        this.dimensional = dimensional;
-//        if(dimensional < 1){
-//            throw new ArithmeticException("Нельзя создать матрицу столь малой размерности");
-//        }
-//        for(int i = 0; i < dimensional; i++){
-//
-//        }
-//    }
 
     @Override
     public Vector[] getMatrixInVectors() {
@@ -135,14 +122,11 @@ public class NDimensionalMatrix implements Matrix {
 
     private double findDeter(int dimensional) {
 
-        if(memoizeDeter.containsKey(this.hashCode())){
-            return memoizeDeter.get(this.hashCode());
-        }
+
 
         double deter = 0;
         if (dimensional == 1) {
             deter = matrixInVectors[0].getArrValues()[0];
-            memoizeDeter.put(this.hashCode(), deter);
             return deter;
         }
         for (int k = 0; k < dimensional; k++) {
@@ -168,7 +152,7 @@ public class NDimensionalMatrix implements Matrix {
                 deter -= tmpDeter * matrixInVectors[0].getArrValues()[k];
             }
         }
-        memoizeDeter.put(this.hashCode(), deter);
+
 
         return deter;
     }

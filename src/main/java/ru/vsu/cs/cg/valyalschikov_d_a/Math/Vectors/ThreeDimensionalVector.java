@@ -3,9 +3,9 @@ package ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors;
 
 public class ThreeDimensionalVector extends NDimensionalVector{
 
-    protected double a;
-    protected double b;
-    protected double c;
+    final private double a;
+    final private double b;
+    final private double c;
 
 
     public ThreeDimensionalVector(double a, double b, double c) {

@@ -3,7 +3,7 @@ import static java.lang.Math.abs;
 
 public class NDimensionalVector implements Vector{
 
-    protected double[] values;
+    final protected double[] values;
     protected int dimensional;
     protected double length;
 

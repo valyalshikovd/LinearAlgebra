@@ -6,6 +6,7 @@ import ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix.ThreeDimensionalMatrix;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Matrix.NDimensionalMatrix;
 import ru.vsu.cs.cg.valyalschikov_d_a.Math.Vectors.*;
 
+
 import java.util.Arrays;
 
 import static java.lang.Math.abs;

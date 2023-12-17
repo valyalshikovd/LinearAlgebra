@@ -58,7 +58,7 @@ public class ThreeDimensionalVector extends NDimensionalVector{
     public ThreeDimensionalVector vectorProduct(ThreeDimensionalVector vector) {
         double i = b * vector.getC() - c * vector.getB();
         double j = a * vector.getC() - c * vector.getA();
-        double k = b * vector.getA() - a * vector.getB();
+        double k = a * vector.getB() - b * vector.getA();
         return new ThreeDimensionalVector(i, -j, k);
     }
 
